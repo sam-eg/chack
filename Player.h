@@ -7,11 +7,18 @@
 
 class Player {
 	char displayChar;
+	int row;
+	int col;
 
 public:
-	explicit Player(char displayChar);
+
+	Player(char displayChar, int row, int col);
 
 	char getDisplayChar() const;
+
+	int getRow() const;
+
+	int getCol() const;
 };
 
 

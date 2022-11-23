@@ -14,12 +14,10 @@ class Level {
 	int verticalSize;
 	Terminal terminal;
 	Player player;
-	int playerRow;
-	int playerCol;
 
 	void printBorderRow(int row);
 	void printInteriorRow(int row);
-	void printPlayer(int row, int col);
+	void printPlayer();
 
 public:
 

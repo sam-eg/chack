@@ -7,10 +7,7 @@
 #include "Player.h"
 
 Level::Level(int horizontalSize, int verticalSize, const Terminal &terminal, const Player &player) :
-	horizontalSize(horizontalSize), verticalSize(verticalSize), terminal(terminal), player(player) {
-	playerRow = 0;
-	playerCol = 0;
-}
+	horizontalSize(horizontalSize), verticalSize(verticalSize), terminal(terminal), player(player) {}
 
 void Level::display() {
 	printBorderRow(-1);
@@ -21,7 +18,7 @@ void Level::display() {
 
 	printBorderRow(horizontalSize);
 
-	printPlayer(playerRow, playerCol);
+	printPlayer();
 }
 
 void Level::printBorderRow(int row) {
@@ -40,6 +37,6 @@ void Level::printInteriorRow(int row) {
 	terminal.display('|', row, verticalSize);
 }
 
-void Level::printPlayer(int row, int col) {
-	terminal.display(player.getDisplayChar(), row, col);
+void Level::printPlayer() {
+	terminal.display(player.getDisplayChar(), player.getRow(), player.getCol());
 }
