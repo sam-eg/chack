@@ -7,14 +7,16 @@
 
 #include "Level.h"
 #include "Terminal.h"
+#include "Player.h"
 
 class Game {
 	Level level;
 	Terminal terminal;
+	Player player;
 
 public:
 
-	Game(const Level &level, const Terminal &terminal);
+	Game(const Level &level, const Terminal &terminal, const Player &player);
 
 	const Level &getLevel() const;
 

@@ -1,13 +1,15 @@
 #include "Game.h"
 #include "Terminal.h"
+#include "Player.h"
 
 int main() {
-	Size levelSize = Size(20, 20);
-	Position offset = Position(5, 5);
-	Terminal terminal(offset);
-	Level level = Level(levelSize, terminal);
+	Terminal terminal(5, 5);
 
-	Game game(level, terminal);
+	Player player = Player('@');
+
+	Level level = Level(20, 20, terminal, player);
+
+	Game game(level, terminal, player);
 
 	game.start();
 	return 0;

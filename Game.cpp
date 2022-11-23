@@ -4,8 +4,9 @@
 
 #include <curses.h>
 #include "Game.h"
+#include "Player.h"
 
-Game::Game(const Level &level, const Terminal &terminal) : level(level), terminal(terminal) {}
+Game::Game(const Level &level, const Terminal &terminal, const Player &player) : level(level), terminal(terminal), player(player) {}
 
 const Level &Game::getLevel() const {
 	return level;
