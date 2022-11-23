@@ -8,9 +8,9 @@
 #include "Position.h"
 
 class Terminal {
-
+	Position offset;
 public:
-	Terminal();
+	explicit Terminal(const Position &offset);
 
 	virtual ~Terminal();
 

@@ -11,7 +11,6 @@
 
 class Level {
 	Size size;
-	Position offset;
 	Terminal terminal;
 
 	void printBorderRow(int row);
@@ -21,7 +20,7 @@ class Level {
 public:
 	const Size &getSize() const;
 
-	Level(const Size &size, const Position &offset, const Terminal &terminal);
+	Level(const Size &size, const Terminal &terminal);
 
 	void display();
 };

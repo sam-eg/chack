@@ -5,7 +5,7 @@
 #include <curses.h>
 #include "Terminal.h"
 
-Terminal::Terminal() {
+Terminal::Terminal(const Position &offset) : offset(offset) {
 	initscr();
 	curs_set(0);
 	cbreak();
@@ -23,6 +23,6 @@ void Terminal::clearScreen() {
 }
 
 void Terminal::display(char character, Position position) {
-	mvaddch(position.getRow(), position.getCol(), character);
+	mvaddch(offset.getRow() + position.getRow(), offset.getCol() + position.getCol(), character);
 	refresh();
 }
