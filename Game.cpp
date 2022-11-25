@@ -26,6 +26,8 @@ void Game::play(Terminal &terminal) {
 
 		player.display(terminal);
 
+		terminal.refreshScreen();
+
 		char input = terminal.read();
 		Command command = parse(input);
 		processCommand(command);

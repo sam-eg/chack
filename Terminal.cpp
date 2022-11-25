@@ -20,7 +20,6 @@ Terminal::~Terminal() {
 
 void Terminal::clearScreen() {
 	clear();
-	refresh();
 }
 
 void Terminal::setOffset(const Position &newOffset) {
@@ -30,9 +29,12 @@ void Terminal::setOffset(const Position &newOffset) {
 void Terminal::display(char character, const Position &position) {
 	Position offsetPosition = position + offset;
 	mvaddch(offsetPosition.getRow(), offsetPosition.getCol(), character);
-	refresh();
 }
 
 char Terminal::read() {
 	return getch();
+}
+
+void Terminal::refreshScreen() {
+	refresh();
 }
