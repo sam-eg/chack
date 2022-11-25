@@ -6,25 +6,26 @@
 #define CHACK_LEVEL_H
 
 
+#include <string>
 #include "Terminal.h"
 #include "Player.h"
+#include "Position.h"
 
 class Level {
+	std::string name;
 	int horizontalSize;
 	int verticalSize;
-	Terminal terminal;
-	Player player;
+	Position offset;
 
-	void printBorderRow(int row);
-	void printInteriorRow(int row);
-	void printPlayer();
+	void printBorderRow(int row, Terminal &terminal) const;
+	void printInteriorRow(int row, Terminal &terminal) const;
 
 public:
+	Level(const std::string &name, int horizontalSize, int verticalSize, const Position &offset);
 
-	Level(int horizontalSize, int verticalSize, const Terminal &terminal, const Player &player);
+	void display(Terminal &terminal);
 
-	void display();
-
+	const Position &getOffset() const;
 };
 
 

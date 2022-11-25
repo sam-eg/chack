@@ -6,16 +6,22 @@
 #define CHACK_TERMINAL_H
 
 
+#include "Position.h"
+
 class Terminal {
-	int rowOffset;
-	int colOffset;
+	Position offset{0, 0};
 public:
-	explicit Terminal(int rowOffset, int colOffset);
+	Terminal();
 
 	virtual ~Terminal();
 
+	void setOffset(const Position &newOffset);
+
 	void clearScreen();
-	void display(char character, int row, int col);
+
+	void display(char character, const Position &position);
+
+	char read();
 };
 
 

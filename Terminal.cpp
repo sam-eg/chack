@@ -5,12 +5,13 @@
 #include <curses.h>
 #include "Terminal.h"
 
-Terminal::Terminal(int rowOffset, int colOffset) : rowOffset(rowOffset), colOffset(colOffset) {
+Terminal::Terminal() {
 	initscr();
 	curs_set(0);
 	cbreak();
 	noecho();
 	clear();
+	refresh();
 }
 
 Terminal::~Terminal() {
@@ -22,7 +23,16 @@ void Terminal::clearScreen() {
 	refresh();
 }
 
-void Terminal::display(char character, int row, int col) {
-	mvaddch(rowOffset + row, colOffset + col, character);
+void Terminal::setOffset(const Position &newOffset) {
+	Terminal::offset = newOffset;
+}
+
+void Terminal::display(char character, const Position &position) {
+	Position offsetPosition = position + offset;
+	mvaddch(offsetPosition.getRow(), offsetPosition.getCol(), character);
 	refresh();
+}
+
+char Terminal::read() {
+	return getch();
 }

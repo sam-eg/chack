@@ -5,20 +5,27 @@
 #ifndef CHACK_PLAYER_H
 #define CHACK_PLAYER_H
 
+#include "Position.h"
+#include "Terminal.h"
+
 class Player {
-	char displayChar;
-	int row;
-	int col;
+	char displayChar = '@';
+	int levelIndex = 0;
+	Position position {0, 0};
 
 public:
 
-	Player(char displayChar, int row, int col);
+	Player();
 
 	char getDisplayChar() const;
 
-	int getRow() const;
+	const Position &getPosition() const;
 
-	int getCol() const;
+	int getLevelIndex() const;
+
+	void setLevelIndex(int levelIndex);
+
+	void display(Terminal &terminal) const;
 };
 
 

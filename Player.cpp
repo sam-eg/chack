@@ -4,16 +4,24 @@
 
 #include "Player.h"
 
-Player::Player(char displayChar, int row, int col) : displayChar(displayChar), row(row), col(col) {}
+Player::Player() = default;
 
 char Player::getDisplayChar() const {
 	return displayChar;
 }
 
-int Player::getRow() const {
-	return row;
+const Position &Player::getPosition() const {
+	return position;
 }
 
-int Player::getCol() const {
-	return col;
+int Player::getLevelIndex() const {
+	return levelIndex;
+}
+
+void Player::setLevelIndex(int newIndex) {
+	Player::levelIndex = newIndex;
+}
+
+void Player::display(Terminal &terminal) const {
+	terminal.display(getDisplayChar(), getPosition());
 }

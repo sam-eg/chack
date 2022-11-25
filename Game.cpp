@@ -2,18 +2,25 @@
 // Created by Sam Evans-Golden on 11/21/22.
 //
 
-#include <curses.h>
 #include "Game.h"
 #include "Player.h"
 
-Game::Game(const Level &level, const Terminal &terminal, const Player &player) : level(level), terminal(terminal), player(player) {}
-
-const Level &Game::getLevel() const {
-	return level;
+Game::Game() {
+	init();
 }
 
-void Game::start() {
-	level.display();
+void Game::init() {
+	levels.emplace_back("test", 20, 20, Position(5, 5));
+}
 
-	getch();
+void Game::start(Terminal &terminal) {
+
+	Level &level = levels.at(player.getLevelIndex());
+	terminal.setOffset(level.getOffset());
+
+	level.display(terminal);
+
+	player.display(terminal);
+
+	terminal.read();
 }

@@ -4,39 +4,36 @@
 
 #include "Level.h"
 #include "Terminal.h"
-#include "Player.h"
 
-Level::Level(int horizontalSize, int verticalSize, const Terminal &terminal, const Player &player) :
-	horizontalSize(horizontalSize), verticalSize(verticalSize), terminal(terminal), player(player) {}
+Level::Level(const std::string &name, int horizontalSize, int verticalSize, const Position &offset) :
+	name(name), horizontalSize(horizontalSize), verticalSize(verticalSize), offset(offset) {}
 
-void Level::display() {
-	printBorderRow(-1);
+void Level::display(Terminal &terminal) {
+	printBorderRow(-1, terminal);
 
 	for (int i = 0; i < horizontalSize; i++) {
-		printInteriorRow(i);
+		printInteriorRow(i, terminal);
 	}
 
-	printBorderRow(horizontalSize);
-
-	printPlayer();
+	printBorderRow(horizontalSize, terminal);
 }
 
-void Level::printBorderRow(int row) {
-	terminal.display('+', row, -1);
+void Level::printBorderRow(int row, Terminal &terminal) const {
+	terminal.display('+', Position(row, -1));
 	for (int i = 0; i < verticalSize; i++) {
-		terminal.display('=', row, i);
+		terminal.display('=', Position(row, i));
 	}
-	terminal.display('+', row, verticalSize);
+	terminal.display('+', Position(row, verticalSize));
 }
 
-void Level::printInteriorRow(int row) {
-	terminal.display('|', row, -1);
+void Level::printInteriorRow(int row, Terminal &terminal) const {
+	terminal.display('|', Position(row, -1));
 	for (int i = 0; i < verticalSize; i++) {
-		terminal.display('.', row, i);
+		terminal.display('.', Position(row, i));
 	}
-	terminal.display('|', row, verticalSize);
+	terminal.display('|', Position(row, verticalSize));
 }
 
-void Level::printPlayer() {
-	terminal.display(player.getDisplayChar(), player.getRow(), player.getCol());
+const Position &Level::getOffset() const {
+	return offset;
 }

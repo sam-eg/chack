@@ -5,22 +5,22 @@
 #ifndef CHACK_GAME_H
 #define CHACK_GAME_H
 
+#include <vector>
 #include "Level.h"
 #include "Terminal.h"
 #include "Player.h"
 
 class Game {
-	Level level;
-	Terminal terminal;
+	std::vector<Level> levels;
 	Player player;
+
+	void init();
 
 public:
 
-	Game(const Level &level, const Terminal &terminal, const Player &player);
+	Game();
 
-	const Level &getLevel() const;
-
-	void start();
+	void start(Terminal &terminal);
 };
 
 
