@@ -5,7 +5,7 @@ int main() {
 	Terminal terminal;
 	Game game;
 
-	game.start(terminal);
+	game.play(terminal);
 
 	return 0;
 }

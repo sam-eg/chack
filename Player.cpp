@@ -25,3 +25,7 @@ void Player::setLevelIndex(int newIndex) {
 void Player::display(Terminal &terminal) const {
 	terminal.display(getDisplayChar(), getPosition());
 }
+
+void Player::setPosition(const Position &newPosition) {
+	Player::position = newPosition;
+}

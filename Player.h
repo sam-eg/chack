@@ -25,6 +25,8 @@ public:
 
 	void setLevelIndex(int levelIndex);
 
+	void setPosition(const Position &newPosition);
+
 	void display(Terminal &terminal) const;
 };
 

@@ -26,6 +26,10 @@ public:
 	void display(Terminal &terminal);
 
 	const Position &getOffset() const;
+
+	int getHorizontalSize() const;
+
+	int getVerticalSize() const;
 };
 
 

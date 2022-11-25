@@ -37,3 +37,11 @@ void Level::printInteriorRow(int row, Terminal &terminal) const {
 const Position &Level::getOffset() const {
 	return offset;
 }
+
+int Level::getHorizontalSize() const {
+	return horizontalSize;
+}
+
+int Level::getVerticalSize() const {
+	return verticalSize;
+}
