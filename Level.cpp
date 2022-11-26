@@ -6,32 +6,37 @@
 #include "Terminal.h"
 
 Level::Level(const std::string &name, int horizontalSize, int verticalSize, const Position &offset) :
-	name(name), horizontalSize(horizontalSize), verticalSize(verticalSize), offset(offset) {}
+	name(name), horizontalSize(horizontalSize), verticalSize(verticalSize), offset(offset) {
+	init();
+}
+
+void Level::init() {
+	createWalls();
+}
 
 void Level::display(Terminal &terminal) {
-	printBorderRow(-1, terminal);
-
-	for (int i = 0; i < horizontalSize; i++) {
-		printInteriorRow(i, terminal);
+	for (Object object : objects) {
+		object.display(terminal);
 	}
-
-	printBorderRow(horizontalSize, terminal);
 }
 
-void Level::printBorderRow(int row, Terminal &terminal) const {
-	terminal.display('+', Position(row, -1));
-	for (int i = 0; i < verticalSize; i++) {
-		terminal.display('=', Position(row, i));
+void Level::createWalls() {
+	objects.emplace_back(Object('+', Position(0, 0), ObjectType::WALL));
+	for (int i = 1; i < horizontalSize - 1; i++) {
+		objects.emplace_back(Object('=', Position(0, i), ObjectType::WALL));
 	}
-	terminal.display('+', Position(row, verticalSize));
-}
+	objects.emplace_back(Object('+', Position(0, verticalSize - 1), ObjectType::WALL));
 
-void Level::printInteriorRow(int row, Terminal &terminal) const {
-	terminal.display('|', Position(row, -1));
-	for (int i = 0; i < verticalSize; i++) {
-		terminal.display('.', Position(row, i));
+	for (int i = 1; i < horizontalSize - 1; i++) {
+		objects.emplace_back('|', Position(i, 0), ObjectType::WALL);
+		objects.emplace_back('|', Position(i, verticalSize - 1), ObjectType::WALL);
 	}
-	terminal.display('|', Position(row, verticalSize));
+
+	objects.emplace_back(Object('+', Position(horizontalSize - 1, 0), ObjectType::WALL));
+	for (int i = 1; i < horizontalSize - 1; i++) {
+		objects.emplace_back(Object('=', Position(horizontalSize - 1, i), ObjectType::WALL));
+	}
+	objects.emplace_back(Object('+', Position(horizontalSize - 1, verticalSize - 1), ObjectType::WALL));
 }
 
 const Position &Level::getOffset() const {

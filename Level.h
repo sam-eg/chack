@@ -7,18 +7,21 @@
 
 
 #include <string>
+#include <vector>
 #include "Terminal.h"
 #include "Player.h"
 #include "Position.h"
+#include "Object.h"
 
 class Level {
+	std::vector<Object> objects;
 	std::string name;
 	int horizontalSize;
 	int verticalSize;
 	Position offset;
 
-	void printBorderRow(int row, Terminal &terminal) const;
-	void printInteriorRow(int row, Terminal &terminal) const;
+	void init();
+	void createWalls();
 
 public:
 	Level(const std::string &name, int horizontalSize, int verticalSize, const Position &offset);
