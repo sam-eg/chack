@@ -30,8 +30,12 @@ void Game::play(Terminal &terminal) {
 
 		char input = terminal.read();
 		Command command = parse(input);
-		movePlayer(command);
-		bool gameRunning = processPlayerInteraction();
+
+		Position newPlayerPosition = computeNewPlayerPosition(command);
+		Object objectAtPosition = level.getObjectAt(newPlayerPosition);
+
+		movePlayerIfPossible(newPlayerPosition, objectAtPosition);
+		bool gameRunning = processPlayerInteraction(objectAtPosition);
 
 		if (command == Command::QUIT || !gameRunning) {
 			break;
@@ -39,42 +43,34 @@ void Game::play(Terminal &terminal) {
 	} while (true);
 }
 
-void Game::movePlayerIfPossible(const Position &delta) {
-	Position newPosition = player.getPosition() + delta;
+void Game::movePlayerIfPossible(const Position &newPosition, const Object &objectAtPosition) {
 	Level &level = levels.at(player.getLevelIndex());
-	Object objectAtPosition = level.getObjectAt(newPosition);
 
 	if (objectAtPosition.getType() != ObjectType::WALL) {
 		player.setPosition(newPosition);
 	}
 }
 
-bool Game::processPlayerInteraction() {
+bool Game::processPlayerInteraction(const Object &object) {
 	Level &level = levels.at(player.getLevelIndex());
-	Object objectAtPosition = level.getObjectAt(player.getPosition());
 
-	if (objectAtPosition.getType() == ObjectType::GOAL) return false;
+	if (object.getType() == ObjectType::GOAL) return false;
 
 	return true;
 }
 
-void Game::movePlayer(Command command) {
+Position Game::computeNewPlayerPosition(Command command) {
 	switch (command) {
 		case Command::UP:
-			movePlayerIfPossible(Position(-1, 0));
-			break;
+			return player.getPosition() + Position(-1, 0);
 		case Command::DOWN:
-			movePlayerIfPossible(Position(1, 0));
-			break;
+			return player.getPosition() + Position(1, 0);
 		case Command::LEFT:
-			movePlayerIfPossible(Position(0, -1));
-			break;
+			return player.getPosition() + Position(0, -1);
 		case Command::RIGHT:
-			movePlayerIfPossible(Position(0, 1));
-			break;
-		case Command::QUIT:
-		case Command::OTHER:
-			break;
+			return player.getPosition() + Position(0, 1);
+		default:
+			return player.getPosition();
 	}
 }
 
