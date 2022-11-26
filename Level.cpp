@@ -12,6 +12,7 @@ Level::Level(const std::string &name, int horizontalSize, int verticalSize, cons
 
 void Level::init() {
 	createWalls();
+	createGoal();
 }
 
 void Level::display(Terminal &terminal) {
@@ -37,6 +38,10 @@ void Level::createWalls() {
 		objects.emplace_back('=', Position(horizontalSize - 1, i), ObjectType::WALL);
 	}
 	objects.emplace_back('+', Position(horizontalSize - 1, verticalSize - 1), ObjectType::WALL);
+}
+
+void Level::createGoal() {
+	objects.emplace_back('P', Position(horizontalSize - 2, verticalSize - 2), ObjectType::GOAL);
 }
 
 const Position &Level::getOffset() const {

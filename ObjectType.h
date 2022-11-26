@@ -8,6 +8,7 @@
 enum class ObjectType {
 	PLAYER,
 	WALL,
-	SPACE
+	SPACE,
+	GOAL
 };
 #endif //CHACK_OBJECTTYPE_H

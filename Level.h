@@ -21,7 +21,10 @@ class Level {
 	Position offset;
 
 	void init();
+
 	void createWalls();
+
+	void createGoal();
 
 public:
 	Level(const std::string &name, int horizontalSize, int verticalSize, const Position &offset);

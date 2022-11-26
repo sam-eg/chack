@@ -30,15 +30,16 @@ void Game::play(Terminal &terminal) {
 
 		char input = terminal.read();
 		Command command = parse(input);
-		processCommand(command);
+		movePlayer(command);
+		bool gameRunning = processPlayerInteraction();
 
-		if (command == Command::QUIT) {
+		if (command == Command::QUIT || !gameRunning) {
 			break;
 		}
 	} while (true);
 }
 
-void Game::movePlayer(const Position &delta) {
+void Game::movePlayerIfPossible(const Position &delta) {
 	Position newPosition = player.getPosition() + delta;
 	Level &level = levels.at(player.getLevelIndex());
 	Object objectAtPosition = level.getObjectAt(newPosition);
@@ -48,19 +49,28 @@ void Game::movePlayer(const Position &delta) {
 	}
 }
 
-void Game::processCommand(Command command) {
+bool Game::processPlayerInteraction() {
+	Level &level = levels.at(player.getLevelIndex());
+	Object objectAtPosition = level.getObjectAt(player.getPosition());
+
+	if (objectAtPosition.getType() == ObjectType::GOAL) return false;
+
+	return true;
+}
+
+void Game::movePlayer(Command command) {
 	switch (command) {
 		case Command::UP:
-			movePlayer(Position(-1, 0));
+			movePlayerIfPossible(Position(-1, 0));
 			break;
 		case Command::DOWN:
-			movePlayer(Position(1, 0));
+			movePlayerIfPossible(Position(1, 0));
 			break;
 		case Command::LEFT:
-			movePlayer(Position(0, -1));
+			movePlayerIfPossible(Position(0, -1));
 			break;
 		case Command::RIGHT:
-			movePlayer(Position(0, 1));
+			movePlayerIfPossible(Position(0, 1));
 			break;
 		case Command::QUIT:
 		case Command::OTHER:
