@@ -33,6 +33,8 @@ public:
 	int getHorizontalSize() const;
 
 	int getVerticalSize() const;
+
+	Object getObjectAt(const Position &position) const;
 };
 
 

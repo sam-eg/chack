@@ -17,6 +17,8 @@ public:
 	int getCol() const;
 
 	Position operator+(const Position &other) const;
+
+	bool operator==(const Position &other) const;
 };
 
 

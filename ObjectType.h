@@ -7,6 +7,7 @@
 
 enum class ObjectType {
 	PLAYER,
-	WALL
+	WALL,
+	SPACE
 };
 #endif //CHACK_OBJECTTYPE_H

@@ -17,3 +17,7 @@ int Position::getCol() const {
 Position Position::operator+(const Position &other) const {
 	return {row + other.getRow(), col + other.getCol()};
 }
+
+bool Position::operator==(const Position &other) const {
+	return row == other.getRow() && col == other.getCol();
+}

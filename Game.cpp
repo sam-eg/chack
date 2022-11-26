@@ -41,9 +41,9 @@ void Game::play(Terminal &terminal) {
 void Game::movePlayer(const Position &delta) {
 	Position newPosition = player.getPosition() + delta;
 	Level &level = levels.at(player.getLevelIndex());
+	Object objectAtPosition = level.getObjectAt(newPosition);
 
-	if ((newPosition.getRow() >= 0 && newPosition.getRow() < level.getVerticalSize()) &&
-			(newPosition.getCol() >= 0 && newPosition.getCol() < level.getHorizontalSize())) {
+	if (objectAtPosition.getType() != ObjectType::WALL) {
 		player.setPosition(newPosition);
 	}
 }

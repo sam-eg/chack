@@ -50,3 +50,10 @@ int Level::getHorizontalSize() const {
 int Level::getVerticalSize() const {
 	return verticalSize;
 }
+
+Object Level::getObjectAt(const Position &position) const {
+	for (Object object : objects) {
+		if (position == object.getPosition()) return object;
+	}
+	return {' ', position, ObjectType::SPACE};
+}
