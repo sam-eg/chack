@@ -21,9 +21,9 @@ void Level::display(Terminal &terminal) {
 }
 
 void Level::createWalls() {
-	objects.emplace_back(Object('+', Position(0, 0), ObjectType::WALL));
+	objects.emplace_back('+', Position(0, 0), ObjectType::WALL);
 	for (int i = 1; i < horizontalSize - 1; i++) {
-		objects.emplace_back(Object('=', Position(0, i), ObjectType::WALL));
+		objects.emplace_back('=', Position(0, i), ObjectType::WALL);
 	}
 	objects.emplace_back(Object('+', Position(0, verticalSize - 1), ObjectType::WALL));
 
@@ -32,11 +32,11 @@ void Level::createWalls() {
 		objects.emplace_back('|', Position(i, verticalSize - 1), ObjectType::WALL);
 	}
 
-	objects.emplace_back(Object('+', Position(horizontalSize - 1, 0), ObjectType::WALL));
+	objects.emplace_back('+', Position(horizontalSize - 1, 0), ObjectType::WALL);
 	for (int i = 1; i < horizontalSize - 1; i++) {
-		objects.emplace_back(Object('=', Position(horizontalSize - 1, i), ObjectType::WALL));
+		objects.emplace_back('=', Position(horizontalSize - 1, i), ObjectType::WALL);
 	}
-	objects.emplace_back(Object('+', Position(horizontalSize - 1, verticalSize - 1), ObjectType::WALL));
+	objects.emplace_back('+', Position(horizontalSize - 1, verticalSize - 1), ObjectType::WALL);
 }
 
 const Position &Level::getOffset() const {
