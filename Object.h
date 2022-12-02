@@ -11,7 +11,7 @@
 #include "Terminal.h"
 
 class Object {
-	char displayCharacter;
+	int displayCharacter;
 	Position position;
 	ObjectType type;
 
@@ -20,7 +20,7 @@ public:
 
 	void display(Terminal &terminal) const;
 
-	char getDisplayCharacter() const;
+	int getDisplayCharacter() const;
 
 	const Position &getPosition() const;
 

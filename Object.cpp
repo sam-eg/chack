@@ -12,7 +12,7 @@ void Object::display(Terminal &terminal) const {
 	terminal.display(getDisplayCharacter(), getPosition());
 }
 
-char Object::getDisplayCharacter() const {
+int Object::getDisplayCharacter() const {
 	return displayCharacter;
 }
 

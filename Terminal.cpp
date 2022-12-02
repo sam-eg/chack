@@ -9,9 +9,8 @@ Terminal::Terminal() {
 	initscr();
 	curs_set(0);
 	cbreak();
-	noecho();
-	clear();
-	refresh();
+	keypad(stdscr, true);
+	set_escdelay(100);
 }
 
 Terminal::~Terminal() {
@@ -26,12 +25,12 @@ void Terminal::setOffset(const Position &newOffset) {
 	Terminal::offset = newOffset;
 }
 
-void Terminal::display(char character, const Position &position) {
+void Terminal::display(int character, const Position &position) {
 	Position offsetPosition = position + offset;
 	mvaddch(offsetPosition.getRow(), offsetPosition.getCol(), character);
 }
 
-char Terminal::read() {
+int Terminal::read() {
 	return getch();
 }
 

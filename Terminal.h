@@ -21,9 +21,9 @@ public:
 
 	void refreshScreen();
 
-	void display(char character, const Position &position);
+	void display(int character, const Position &position);
 
-	char read();
+	int read();
 };
 
 

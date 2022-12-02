@@ -2,6 +2,7 @@
 // Created by Sam Evans-Golden on 11/21/22.
 //
 
+#include <curses.h>
 #include "Game.h"
 #include "Player.h"
 #include "Command.h"
@@ -28,7 +29,7 @@ void Game::play(Terminal &terminal) {
 
 		terminal.refreshScreen();
 
-		char input = terminal.read();
+		int input = terminal.read();
 		Command command = parse(input);
 
 		Position newPlayerPosition = computeNewPlayerPosition(command);
@@ -74,21 +75,21 @@ Position Game::computeNewPlayerPosition(Command command) {
 	}
 }
 
-Command Game::parse(char input) {
+Command Game::parse(int input) {
 	switch (input) {
 		case 'q':
-		//case 27: // esc
+		case 0x1b: // esc
 			return Command::QUIT;
-		case 65: // up arrow
+		case KEY_UP: // up arrow
 		case 'w':
 			return Command::UP;
-		case 66: // down arrow
+		case KEY_DOWN: // down arrow
 		case 's':
 			return Command::DOWN;
-		case 68: //left arrow
+		case KEY_LEFT: // left arrow
 		case 'a':
 			return Command::LEFT;
-		case 67: // right arrow
+		case KEY_RIGHT: // right arrow
 		case 'd':
 			return Command::RIGHT;
 		default:
