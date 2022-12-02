@@ -4,8 +4,8 @@
 
 #include "Level.h"
 #include "Terminal.h"
-#include "Wall.h"
-#include "Goal.h"
+#include "Objects/Wall.h"
+#include "Objects/Goal.h"
 
 Level::Level(const std::string &name, int horizontalSize, int verticalSize, const Position &offset) :
 	name(name), horizontalSize(horizontalSize), verticalSize(verticalSize), offset(offset) {

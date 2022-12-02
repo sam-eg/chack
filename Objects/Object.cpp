@@ -3,7 +3,7 @@
 //
 
 #include "Object.h"
-#include "Terminal.h"
+#include "../Terminal.h"
 
 Object::Object(char displayCharacter, const Position &position, ObjectType type) :
 	displayCharacter(displayCharacter), position(position), type(type) {}

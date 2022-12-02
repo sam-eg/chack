@@ -5,8 +5,6 @@
 #ifndef CHACK_PLAYER_H
 #define CHACK_PLAYER_H
 
-#include "Position.h"
-#include "Terminal.h"
 #include "Object.h"
 
 class Player : public Object {
@@ -17,7 +15,7 @@ public:
 	int getLevelIndex() const;
 
 	void setLevelIndex(int levelIndex);
-	
+
 };
 
 

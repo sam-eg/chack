@@ -4,7 +4,7 @@
 
 #include <curses.h>
 #include "Game.h"
-#include "Player.h"
+#include "Objects/Player.h"
 #include "Command.h"
 
 Game::Game() {

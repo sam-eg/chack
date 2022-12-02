@@ -9,9 +9,9 @@
 #include <string>
 #include <vector>
 #include "Terminal.h"
-#include "Player.h"
+#include "Objects/Player.h"
 #include "Position.h"
-#include "Object.h"
+#include "Objects/Object.h"
 
 class Level {
 	std::vector<Object> objects;

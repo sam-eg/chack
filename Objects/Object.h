@@ -6,9 +6,9 @@
 #define CHACK_OBJECT_H
 
 
-#include "Position.h"
+#include "../Position.h"
 #include "ObjectType.h"
-#include "Terminal.h"
+#include "../Terminal.h"
 
 class Object {
 	int displayCharacter;
