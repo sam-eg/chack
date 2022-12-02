@@ -7,27 +7,17 @@
 
 #include "Position.h"
 #include "Terminal.h"
+#include "Object.h"
 
-class Player {
-	char displayChar = '@';
+class Player : public Object {
 	int levelIndex = 0;
-	Position position {1, 1};
-
 public:
-
-	Player();
-
-	char getDisplayChar() const;
-
-	const Position &getPosition() const;
+	Player(const Position &position, int levelIndex);
 
 	int getLevelIndex() const;
 
 	void setLevelIndex(int levelIndex);
-
-	void setPosition(const Position &newPosition);
-
-	void display(Terminal &terminal) const;
+	
 };
 
 

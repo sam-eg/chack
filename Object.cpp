@@ -20,6 +20,10 @@ const Position &Object::getPosition() const {
 	return position;
 }
 
+void Object::setPosition(const Position &position) {
+	Object::position = position;
+}
+
 ObjectType Object::getType() const {
 	return type;
 }

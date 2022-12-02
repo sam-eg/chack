@@ -25,6 +25,8 @@ public:
 	const Position &getPosition() const;
 
 	ObjectType getType() const;
+
+	void setPosition(const Position &position);
 };
 
 
