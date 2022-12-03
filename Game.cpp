@@ -21,7 +21,6 @@ void Game::play(Terminal &terminal) {
 		terminal.clearScreen();
 
 		Level &level = levels.at(player.getLevelIndex());
-//		terminal.setOffset(level.getOffset());
 
 		level.display(terminal);
 
