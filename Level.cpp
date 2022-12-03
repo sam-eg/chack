@@ -42,3 +42,12 @@ Object Level::getObjectAt(const Position &position) const {
 void Level::putObject(Object object) {
 	objects.push_back(object);
 }
+
+void Level::deleteObjectAt(const Position &position) {
+	for (int i = 0; i < objects.size(); i++) {
+		if (position == objects.at(i).getPosition()) {
+			objects.erase(objects.begin() + i);
+			break;
+		}
+	}
+}

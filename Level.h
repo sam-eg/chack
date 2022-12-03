@@ -32,6 +32,8 @@ public:
 	Object getObjectAt(const Position &position) const;
 
 	void putObject(Object object);
+
+	void deleteObjectAt(const Position &position);
 };
 
 
