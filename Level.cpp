@@ -4,16 +4,15 @@
 
 #include "Level.h"
 #include "Terminal.h"
-#include "Objects/Wall.h"
-#include "Objects/Goal.h"
+#include "objects/Wall.h"
+#include "objects/Goal.h"
 
-Level::Level(const std::string &name, int horizontalSize, int verticalSize, const Position &offset) :
-	name(name), horizontalSize(horizontalSize), verticalSize(verticalSize), offset(offset) {
+Level::Level(const std::string &name) : name(name) {
 	init();
 }
 
 void Level::init() {
-	createWalls();
+	createRooms();
 	createGoal();
 }
 
@@ -22,40 +21,15 @@ void Level::display(Terminal &terminal) {
 		object.display(terminal);
 	}
 }
+void Level::createRooms() {
+	Room room = Room(20, 20, Position(5, 5));
+	room.init(objects);
 
-void Level::createWalls() {
-	objects.emplace_back(Wall(Wall::CORNER, Position(0, 0)));
-	for (int i = 1; i < horizontalSize - 1; i++) {
-		objects.emplace_back(Wall(Wall::HORIZONTAL, Position(0, i)));
-	}
-	objects.emplace_back(Object(Wall(Wall::CORNER, Position(0, verticalSize - 1))));
-
-	for (int i = 1; i < horizontalSize - 1; i++) {
-		objects.emplace_back(Wall(Wall::VERTICAL, Position(i, 0)));
-		objects.emplace_back(Wall(Wall::VERTICAL, Position(i, verticalSize - 1)));
-	}
-
-	objects.emplace_back(Wall(Wall::CORNER, Position(horizontalSize - 1, 0)));
-	for (int i = 1; i < horizontalSize - 1; i++) {
-		objects.emplace_back(Wall(Wall::HORIZONTAL, Position(horizontalSize - 1, i)));
-	}
-	objects.emplace_back(Wall(Wall::CORNER, Position(horizontalSize - 1, verticalSize - 1)));
+	rooms.push_back(room);
 }
 
 void Level::createGoal() {
-	objects.emplace_back(Goal(Position(horizontalSize - 2, verticalSize - 2)));
-}
-
-const Position &Level::getOffset() const {
-	return offset;
-}
-
-int Level::getHorizontalSize() const {
-	return horizontalSize;
-}
-
-int Level::getVerticalSize() const {
-	return verticalSize;
+	putObject(Goal(Position(12, 12)));
 }
 
 Object Level::getObjectAt(const Position &position) const {
@@ -63,4 +37,8 @@ Object Level::getObjectAt(const Position &position) const {
 		if (position == object.getPosition()) return object;
 	}
 	return {' ', position, ObjectType::SPACE};
+}
+
+void Level::putObject(Object object) {
+	objects.push_back(object);
 }

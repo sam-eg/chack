@@ -8,12 +8,12 @@
 #include <vector>
 #include "Level.h"
 #include "Terminal.h"
-#include "Objects/Player.h"
+#include "objects/Player.h"
 #include "Command.h"
 
 class Game {
 	std::vector<Level> levels;
-	Player player{Position(1, 1), 0};
+	Player player{Position(6, 6), 0};
 
 	void init();
 	static Command parse(int input);

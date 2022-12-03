@@ -4,7 +4,7 @@
 
 #include <curses.h>
 #include "Game.h"
-#include "Objects/Player.h"
+#include "objects/Player.h"
 #include "Command.h"
 
 Game::Game() {
@@ -12,7 +12,7 @@ Game::Game() {
 }
 
 void Game::init() {
-	levels.emplace_back("test", 20, 20, Position(5, 5));
+	levels.emplace_back("test");
 }
 
 void Game::play(Terminal &terminal) {
@@ -21,7 +21,7 @@ void Game::play(Terminal &terminal) {
 		terminal.clearScreen();
 
 		Level &level = levels.at(player.getLevelIndex());
-		terminal.setOffset(level.getOffset());
+//		terminal.setOffset(level.getOffset());
 
 		level.display(terminal);
 

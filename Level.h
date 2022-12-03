@@ -9,35 +9,29 @@
 #include <string>
 #include <vector>
 #include "Terminal.h"
-#include "Objects/Player.h"
 #include "Position.h"
-#include "Objects/Object.h"
+#include "objects/Object.h"
+#include "Room.h"
 
 class Level {
-	std::vector<Object> objects;
 	std::string name;
-	int horizontalSize;
-	int verticalSize;
-	Position offset;
+	std::vector<Object> objects;
+	std::vector<Room> rooms;
 
 	void init();
 
-	void createWalls();
-
 	void createGoal();
 
+	void createRooms();
+
 public:
-	Level(const std::string &name, int horizontalSize, int verticalSize, const Position &offset);
+	explicit Level(const std::string &name);
 
 	void display(Terminal &terminal);
 
-	const Position &getOffset() const;
-
-	int getHorizontalSize() const;
-
-	int getVerticalSize() const;
-
 	Object getObjectAt(const Position &position) const;
+
+	void putObject(Object object);
 };
 
 
