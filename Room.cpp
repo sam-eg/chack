@@ -15,7 +15,7 @@ void Room::init(std::vector<Object> &objects) {
 void Room::addWalls(std::vector<Object> &objects) const {
 
 	objects.emplace_back(Wall(Wall::CORNER, Position(0, 0) + offset));
-	for (int i = 1; i < horizontalSize - 1; i++) {
+	for (int i = 1; i < verticalSize - 1; i++) {
 		objects.emplace_back(Wall(Wall::HORIZONTAL, Position(0, i) + offset));
 	}
 	objects.emplace_back(Wall(Wall::CORNER, Position(0, verticalSize - 1) + offset));
@@ -26,7 +26,7 @@ void Room::addWalls(std::vector<Object> &objects) const {
 	}
 
 	objects.emplace_back(Wall(Wall::CORNER, Position(horizontalSize - 1, 0) + offset));
-	for (int i = 1; i < horizontalSize - 1; i++) {
+	for (int i = 1; i < verticalSize - 1; i++) {
 		objects.emplace_back(Wall(Wall::HORIZONTAL, Position(horizontalSize - 1, i) + offset));
 	}
 	objects.emplace_back(Wall(Wall::CORNER, Position(horizontalSize - 1, verticalSize - 1) + offset));
