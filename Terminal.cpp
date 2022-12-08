@@ -30,10 +30,23 @@ void Terminal::display(int character, const Position &position) {
 	mvaddch(offsetPosition.getRow(), offsetPosition.getCol(), character);
 }
 
+void Terminal::display(const char* string, const Position &position) {
+	Position offsetPosition = position + offset;
+	mvaddstr(offsetPosition.getRow(), offsetPosition.getCol(), string);
+}
+
 int Terminal::read() {
 	return getch();
 }
 
 void Terminal::refreshScreen() {
 	refresh();
+}
+
+int Terminal::rows() {
+	return LINES;
+}
+
+int Terminal::cols() {
+	return COLS;
 }

@@ -20,6 +20,10 @@ class Game {
 	Position computeNewPlayerPosition(Command command);
 	void movePlayerIfPossible(const Position &newPosition, const Object &objectAtPosition);
 	bool processPlayerInteraction(const Object &object);
+	static void showTitle(Terminal &terminal);
+	void mainLoop(Terminal &terminal);
+	static void showWinScreen(Terminal &terminal);
+	static void showLoseScreen(Terminal &terminal);
 public:
 
 	Game();

@@ -14,3 +14,11 @@ void Player::setLevelIndex(int newIndex) {
 }
 
 Player::Player(const Position &position, int levelIndex) : Object('@', position, ObjectType::PLAYER), levelIndex(levelIndex) {}
+
+bool Player::didWin() const {
+	return won;
+}
+
+void Player::setWon(bool didWin) {
+	Player::won = didWin;
+}

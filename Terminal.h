@@ -23,7 +23,13 @@ public:
 
 	void display(int character, const Position &position);
 
+	void display(const char *string, const Position &position);
+
 	int read();
+
+	int rows();
+
+	int cols();
 };
 
 

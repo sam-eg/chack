@@ -6,6 +6,9 @@
 #include "Game.h"
 #include "objects/Player.h"
 #include "Command.h"
+#include "Title.h"
+#include "WinScreen.h"
+#include "LoseScreen.h"
 
 Game::Game() {
 	init();
@@ -16,7 +19,23 @@ void Game::init() {
 }
 
 void Game::play(Terminal &terminal) {
+	showTitle(terminal);
+	mainLoop(terminal);
 
+	if (player.didWin()) {
+		showWinScreen(terminal);
+	} else {
+		showLoseScreen(terminal);
+	}
+}
+
+void Game::showTitle(Terminal &terminal) {
+	terminal.clearScreen();
+	Title::display(terminal);
+	terminal.read();
+}
+
+void Game::mainLoop(Terminal &terminal) {
 	do {
 		terminal.clearScreen();
 
@@ -43,6 +62,18 @@ void Game::play(Terminal &terminal) {
 	} while (true);
 }
 
+void Game::showWinScreen(Terminal &terminal) {
+	terminal.clearScreen();
+	WinScreen::display(terminal);
+	terminal.read();
+}
+
+void Game::showLoseScreen(Terminal &terminal) {
+	terminal.clearScreen();
+	LoseScreen::display(terminal);
+	terminal.read();
+}
+
 void Game::movePlayerIfPossible(const Position &newPosition, const Object &objectAtPosition) {
 	Level &level = levels.at(player.getLevelIndex());
 
@@ -52,9 +83,10 @@ void Game::movePlayerIfPossible(const Position &newPosition, const Object &objec
 }
 
 bool Game::processPlayerInteraction(const Object &object) {
-	Level &level = levels.at(player.getLevelIndex());
-
-	if (object.getType() == ObjectType::GOAL) return false;
+	if (object.getType() == ObjectType::GOAL) {
+		player.setWon(true);
+		return false;
+	}
 
 	return true;
 }

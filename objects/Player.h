@@ -9,6 +9,8 @@
 
 class Player : public Object {
 	int levelIndex = 0;
+	bool won = false;
+
 public:
 	Player(const Position &position, int levelIndex);
 
@@ -16,6 +18,9 @@ public:
 
 	void setLevelIndex(int levelIndex);
 
+	bool didWin() const;
+
+	void setWon(bool didWin);
 };
 
 
