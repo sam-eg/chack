@@ -24,6 +24,8 @@ class Level {
 
 	void createRooms();
 
+	void createObstacles();
+
 public:
 	explicit Level(const std::string &name);
 

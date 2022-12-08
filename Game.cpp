@@ -40,6 +40,7 @@ void Game::mainLoop(Terminal &terminal) {
 		terminal.clearScreen();
 
 		Level &level = levels.at(player.getLevelIndex());
+		terminal.setOffset(Position(5, 5));
 
 		level.display(terminal);
 
@@ -85,6 +86,8 @@ void Game::movePlayerIfPossible(const Position &newPosition, const Object &objec
 bool Game::processPlayerInteraction(const Object &object) {
 	if (object.getType() == ObjectType::GOAL) {
 		player.setWon(true);
+		return false;
+	} else if (object.getType() == ObjectType::OBSTACLE) {
 		return false;
 	}
 
