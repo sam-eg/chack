@@ -6,7 +6,7 @@
 #define CHACK_TITLE_H
 
 
-#include "Terminal.h"
+#include "../Terminal.h"
 
 class Title {
 public:

@@ -6,9 +6,9 @@
 #include "Game.h"
 #include "objects/Player.h"
 #include "Command.h"
-#include "Title.h"
-#include "WinScreen.h"
-#include "LoseScreen.h"
+#include "screens/Title.h"
+#include "screens/WinScreen.h"
+#include "screens/LoseScreen.h"
 
 Game::Game() {
 	init();

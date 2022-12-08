@@ -6,7 +6,7 @@
 #define CHACK_LOSESCREEN_H
 
 
-#include "Terminal.h"
+#include "../Terminal.h"
 
 class LoseScreen {
 public:

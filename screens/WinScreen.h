@@ -6,8 +6,8 @@
 #define CHACK_WINSCREEN_H
 
 
-#include "Terminal.h"
-#include "objects/Player.h"
+#include "../Terminal.h"
+#include "../objects/Player.h"
 
 class WinScreen {
 public:

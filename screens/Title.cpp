@@ -3,7 +3,7 @@
 //
 
 #include "Title.h"
-#include "Terminal.h"
+#include "../Terminal.h"
 
 void Title::display(Terminal &terminal) {
 	terminal.display("CHack", Position {5, terminal.cols() / 2 - 2});
