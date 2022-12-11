@@ -8,46 +8,12 @@
 #include "objects/Goal.h"
 #include "objects/Obstacle.h"
 
-Level::Level(const std::string &name) : name(name) {
-	init();
-}
-
-void Level::init() {
-	createRooms();
-	createGoal();
-	createObstacles();
-}
+Level::Level(const std::string &name) : name(name) {}
 
 void Level::display(Terminal &terminal) {
 	for (Object object : objects) {
 		object.display(terminal);
 	}
-}
-void Level::createRooms() {
-	Room room = Room(20, 20, Position(0, 0));
-	room.init(objects);
-
-	rooms.push_back(room);
-}
-
-void Level::createObstacles() {
-	putObject(Obstacle(Position(2, 3)));
-	putObject(Obstacle(Position(5, 4)));
-	putObject(Obstacle(Position(5, 7)));
-	putObject(Obstacle(Position(7, 1)));
-	putObject(Obstacle(Position(7, 10)));
-	putObject(Obstacle(Position(7, 15)));
-	putObject(Obstacle(Position(9, 5)));
-	putObject(Obstacle(Position(10, 2)));
-	putObject(Obstacle(Position(10, 10)));
-	putObject(Obstacle(Position(10, 18)));
-	putObject(Obstacle(Position(11, 3)));
-	putObject(Obstacle(Position(13, 7)));
-
-}
-
-void Level::createGoal() {
-	putObject(Goal(Position(18, 18)));
 }
 
 Object Level::getObjectAt(const Position &position) const {
@@ -68,4 +34,32 @@ void Level::deleteObjectAt(const Position &position) {
 			break;
 		}
 	}
+}
+
+void Level::addRoom(int horizontalSize, int verticalSize, const Position &position) {
+	putObject(Wall(Wall::CORNER, Position(0, 0) + position));
+	for (int i = 1; i < verticalSize - 1; i++) {
+		putObject(Wall(Wall::HORIZONTAL, Position(0, i) + position));
+	}
+	putObject(Wall(Wall::CORNER, Position(0, verticalSize - 1) + position));
+
+	for (int i = 1; i < horizontalSize - 1; i++) {
+		putObject(Wall(Wall::VERTICAL, Position(i, 0) + position));
+		putObject(Wall(Wall::VERTICAL, Position(i, verticalSize - 1) + position));
+	}
+
+	putObject(Wall(Wall::CORNER, Position(horizontalSize - 1, 0) + position));
+	for (int i = 1; i < verticalSize - 1; i++) {
+		putObject(Wall(Wall::HORIZONTAL, Position(horizontalSize - 1, i) + position));
+	}
+	putObject(Wall(Wall::CORNER, Position(horizontalSize - 1, verticalSize - 1) + position));
+
+}
+
+void Level::addObstacle(const Position &position) {
+	putObject(Obstacle(position));
+}
+
+void Level::addGoal(const Position &position) {
+	putObject(Goal(position));
 }

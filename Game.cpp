@@ -15,7 +15,14 @@ Game::Game() {
 }
 
 void Game::init() {
-	levels.emplace_back("test");
+	Level levelOne {"one"};
+	levelOne.addRoom(20, 20, Position(5, 5));
+	levelOne.addObstacle(Position(7, 7));
+	levelOne.addGoal(Position(23, 23));
+
+	levels.push_back(levelOne);
+
+	player.setPosition(Position(6, 6));
 }
 
 void Game::play(Terminal &terminal) {
@@ -40,7 +47,6 @@ void Game::mainLoop(Terminal &terminal) {
 		terminal.clearScreen();
 
 		Level &level = levels.at(player.getLevelIndex());
-		terminal.setOffset(Position(5, 5));
 
 		level.display(terminal);
 
@@ -76,8 +82,6 @@ void Game::showLoseScreen(Terminal &terminal) {
 }
 
 void Game::movePlayerIfPossible(const Position &newPosition, const Object &objectAtPosition) {
-	Level &level = levels.at(player.getLevelIndex());
-
 	if (objectAtPosition.getType() != ObjectType::WALL) {
 		player.setPosition(newPosition);
 	}

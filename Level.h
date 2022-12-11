@@ -11,20 +11,10 @@
 #include "Terminal.h"
 #include "Position.h"
 #include "objects/Object.h"
-#include "Room.h"
 
 class Level {
 	std::string name;
 	std::vector<Object> objects;
-	std::vector<Room> rooms;
-
-	void init();
-
-	void createGoal();
-
-	void createRooms();
-
-	void createObstacles();
 
 public:
 	explicit Level(const std::string &name);
@@ -36,6 +26,12 @@ public:
 	void putObject(Object object);
 
 	void deleteObjectAt(const Position &position);
+
+	void addRoom(int horizontalSize, int verticalSize, const Position &position);
+
+	void addObstacle(const Position &position);
+
+	void addGoal(const Position &position);
 };
 
 
