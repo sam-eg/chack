@@ -38,21 +38,18 @@ void Level::deleteObjectAt(const Position &position) {
 
 void Level::addRoom(int horizontalSize, int verticalSize, const Position &position) {
 	putObject(Wall(Wall::CORNER, Position(0, 0) + position));
+	putObject(Wall(Wall::CORNER, Position(horizontalSize - 1, 0) + position));
 	for (int i = 1; i < verticalSize - 1; i++) {
 		putObject(Wall(Wall::HORIZONTAL, Position(0, i) + position));
+		putObject(Wall(Wall::HORIZONTAL, Position(horizontalSize - 1, i) + position));
 	}
 	putObject(Wall(Wall::CORNER, Position(0, verticalSize - 1) + position));
+	putObject(Wall(Wall::CORNER, Position(horizontalSize - 1, verticalSize - 1) + position));
 
 	for (int i = 1; i < horizontalSize - 1; i++) {
 		putObject(Wall(Wall::VERTICAL, Position(i, 0) + position));
 		putObject(Wall(Wall::VERTICAL, Position(i, verticalSize - 1) + position));
 	}
-
-	putObject(Wall(Wall::CORNER, Position(horizontalSize - 1, 0) + position));
-	for (int i = 1; i < verticalSize - 1; i++) {
-		putObject(Wall(Wall::HORIZONTAL, Position(horizontalSize - 1, i) + position));
-	}
-	putObject(Wall(Wall::CORNER, Position(horizontalSize - 1, verticalSize - 1) + position));
 
 }
 
