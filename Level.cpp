@@ -60,22 +60,16 @@ void Level::addHorizontalHall(int length, const Position &position) {
 	int hallWidth = 3;
 	for (int i = 0; i < hallWidth; i++) {
 		deleteObjectAt(Position(i, 0) + position);
-	}
-
-	for (int i = 0; i < hallWidth; i++) {
 		deleteObjectAt(Position(i, length - 1) + position);
 	}
 
 	putObject(Wall(Wall::CORNER, Position(0, 0) + position));
+	putObject(Wall(Wall::CORNER, Position(0, length - 1) + position));
 	for (int i = 1; i < length - 1; i++) {
 		putObject(Wall(Wall::HORIZONTAL, Position(0, i) + position));
-	}
-	putObject(Wall(Wall::CORNER, Position(0, length - 1) + position));
-
-	putObject(Wall(Wall::CORNER, Position(hallWidth - 1, 0) + position));
-	for (int i = 1; i < length - 1; i++) {
 		putObject(Wall(Wall::HORIZONTAL, Position(hallWidth - 1, i) + position));
 	}
+	putObject(Wall(Wall::CORNER, Position(hallWidth - 1, 0) + position));
 	putObject(Wall(Wall::CORNER, Position(hallWidth - 1, length - 1) + position));
 }
 
@@ -83,22 +77,16 @@ void Level::addVerticalHall(int length, const Position &position) {
 	int hallWidth = 3;
 	for (int i = 0; i < hallWidth; i++) {
 		deleteObjectAt(Position(0, i) + position);
-	}
-
-	for (int i = 0; i < hallWidth; i++) {
 		deleteObjectAt(Position(length - 1, i) + position);
 	}
 
 	putObject(Wall(Wall::CORNER, Position(0, 0) + position));
-	for (int i = 1; i < length - 1; i++) {
-		putObject(Wall(Wall::VERTICAL, Position(i, 0) + position));
-	}
-	putObject(Wall(Wall::CORNER, Position(length - 1, 0) + position));
-
 	putObject(Wall(Wall::CORNER, Position(0, hallWidth - 1) + position));
 	for (int i = 1; i < length - 1; i++) {
+		putObject(Wall(Wall::VERTICAL, Position(i, 0) + position));
 		putObject(Wall(Wall::VERTICAL, Position(i, hallWidth - 1) + position));
 	}
+	putObject(Wall(Wall::CORNER, Position(length - 1, 0) + position));
 	putObject(Wall(Wall::CORNER, Position(length - 1, hallWidth - 1) + position));
 }
 
