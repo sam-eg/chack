@@ -16,13 +16,16 @@ Game::Game() {
 
 void Game::init() {
 	Level levelOne {"one"};
-	levelOne.addRoom(20, 20, Position(5, 5));
-	levelOne.addObstacle(Position(7, 7));
-	levelOne.addGoal(Position(23, 23));
+	levelOne.addRoom(10, 7, Position(0, 0));
+	levelOne.addObstacle(Position(2, 2));
+	levelOne.addRoom(7, 10, Position(2, 10));
+	levelOne.addHorizontalHall(5, Position(5, 6));
+
+	levelOne.addGoal(Position(7, 18));
 
 	levels.push_back(levelOne);
 
-	player.setPosition(Position(6, 6));
+	player.setPosition(Position(1, 1));
 }
 
 void Game::play(Terminal &terminal) {

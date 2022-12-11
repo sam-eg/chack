@@ -32,6 +32,10 @@ public:
 	void addObstacle(const Position &position);
 
 	void addGoal(const Position &position);
+
+	void addHorizontalHall(int length, const Position &position);
+
+	void addVerticalHall(int length, const Position &position);
 };
 
 
