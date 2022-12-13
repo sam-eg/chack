@@ -4,7 +4,6 @@
 
 #include <curses.h>
 #include "Game.h"
-#include "objects/Player.h"
 #include "Command.h"
 #include "screens/Title.h"
 #include "screens/WinScreen.h"
@@ -69,8 +68,8 @@ void Game::mainLoop(Terminal &terminal) {
 		Position newPlayerPosition = computeNewPlayerPosition(command);
 		Object objectAtPosition = level.getObjectAt(newPlayerPosition);
 
-		movePlayerIfPossible(newPlayerPosition, objectAtPosition);
-		bool gameRunning = processPlayerInteraction(objectAtPosition);
+		movePlayerIfPossible(newPlayerPosition, objectAtPosition, level);
+		bool gameRunning = processPlayerInteraction(objectAtPosition, level);
 
 		if (command == Command::QUIT || !gameRunning) {
 			break;
@@ -90,18 +89,25 @@ void Game::showLoseScreen(Terminal &terminal) {
 	terminal.read();
 }
 
-void Game::movePlayerIfPossible(const Position &newPosition, const Object &objectAtPosition) {
-	if (objectAtPosition.getType() != ObjectType::WALL) {
+void Game::movePlayerIfPossible(const Position &newPosition, const Object &objectAtPosition, Level &level) {
+	if (objectAtPosition.getType() == ObjectType::DOOR) {
+		if (player.hasInInventory(ObjectType::KEY)) {
+			level.deleteObjectAt(objectAtPosition.getPosition());
+		}
+	} else if (objectAtPosition.getType() != ObjectType::WALL) {
 		player.setPosition(newPosition);
 	}
 }
 
-bool Game::processPlayerInteraction(const Object &object) {
+bool Game::processPlayerInteraction(const Object &object, Level &level) {
 	if (object.getType() == ObjectType::GOAL) {
 		player.setWon(true);
 		return false;
 	} else if (object.getType() == ObjectType::OBSTACLE) {
 		return false;
+	} else if (object.getType() == ObjectType::KEY) {
+		player.addToInventory(object);
+		level.deleteObjectAt(object.getPosition());
 	}
 
 	return true;

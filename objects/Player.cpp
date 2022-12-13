@@ -22,3 +22,16 @@ bool Player::didWin() const {
 void Player::setWon(bool didWin) {
 	Player::won = didWin;
 }
+
+void Player::addToInventory(const Object &object) {
+	inventory.push_back(object);
+}
+
+bool Player::hasInInventory(ObjectType objectType) {
+	for (auto item : inventory) {
+		if (item.getType() == objectType) {
+			return true;
+		}
+	}
+	return false;
+}
