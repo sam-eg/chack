@@ -10,6 +10,8 @@ enum class ObjectType {
 	WALL,
 	SPACE,
 	GOAL,
-	OBSTACLE
+	OBSTACLE,
+	KEY,
+	DOOR
 };
 #endif //CHACK_OBJECTTYPE_H

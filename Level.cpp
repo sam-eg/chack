@@ -23,7 +23,7 @@ Object Level::getObjectAt(const Position &position) const {
 	return {' ', position, ObjectType::SPACE};
 }
 
-void Level::putObject(Object object) {
+void Level::putObject(const Object &object) {
 	objects.push_back(object);
 }
 
@@ -85,12 +85,4 @@ void Level::addVerticalHall(int length, const Position &position) {
 	}
 	putObject(Wall(Wall::CORNER, Position(length - 1, 0) + position));
 	putObject(Wall(Wall::CORNER, Position(length - 1, hallWidth - 1) + position));
-}
-
-void Level::addObstacle(const Position &position) {
-	putObject(Obstacle(position));
-}
-
-void Level::addGoal(const Position &position) {
-	putObject(Goal(position));
 }

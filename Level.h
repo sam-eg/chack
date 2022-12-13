@@ -23,15 +23,11 @@ public:
 
 	Object getObjectAt(const Position &position) const;
 
-	void putObject(Object object);
+	void putObject(const Object &object);
 
 	void deleteObjectAt(const Position &position);
 
 	void addRoom(int horizontalSize, int verticalSize, const Position &position);
-
-	void addObstacle(const Position &position);
-
-	void addGoal(const Position &position);
 
 	void addHorizontalHall(int length, const Position &position);
 
