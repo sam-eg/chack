@@ -18,8 +18,8 @@ class Game {
 	void init();
 	static Command parse(int input);
 	Position computeNewPlayerPosition(Command command);
-	void movePlayerIfPossible(const Position &newPosition, const Object &objectAtPosition, Level &level);
-	bool processPlayerInteraction(const Object &object, Level &level);
+	void movePlayerIfPossible(const Position &newPosition, const Object *objectAtPosition, Level &level);
+	bool processPlayerInteraction(const Object *object, Level &level);
 	static void showTitle(Terminal &terminal);
 	void mainLoop(Terminal &terminal);
 	static void showWinScreen(Terminal &terminal);

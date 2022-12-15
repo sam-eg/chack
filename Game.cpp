@@ -12,6 +12,7 @@
 #include "objects/Goal.h"
 #include "objects/Door.h"
 #include "objects/Key.h"
+#include "objects/Coin.h"
 
 Game::Game() {
 	init();
@@ -23,12 +24,14 @@ void Game::init() {
 	levelOne.addRoom(7, 10, Position(2, 10));
 	levelOne.addHorizontalHall(5, Position(5, 6));
 
-	levelOne.putObject(Obstacle(Position(2, 2)));
-	levelOne.putObject(Door(Position(6, 6)));
-	levelOne.putObject(Key(Position(8, 4)));
-	levelOne.putObject(Goal(Position(7, 18)));
+	levelOne.putObject(new Obstacle(Position(2, 2)));
+	levelOne.putObject(new Door(Position(6, 6)));
+	levelOne.putObject(new Key(Position(8, 4)));
+	levelOne.putObject(new Coin(Position(3, 13), 3));
+	levelOne.putObject(new Coin(Position(7, 2), 5));
+	levelOne.putObject(new Goal(Position(7, 18)));
 
-	levels.push_back(levelOne);
+	levels.push_back(std::move(levelOne));
 
 	player.setPosition(Position(1, 1));
 }
@@ -66,7 +69,7 @@ void Game::mainLoop(Terminal &terminal) {
 		Command command = parse(input);
 
 		Position newPlayerPosition = computeNewPlayerPosition(command);
-		Object objectAtPosition = level.getObjectAt(newPlayerPosition);
+		auto objectAtPosition = level.getObjectAt(newPlayerPosition);
 
 		movePlayerIfPossible(newPlayerPosition, objectAtPosition, level);
 		bool gameRunning = processPlayerInteraction(objectAtPosition, level);
@@ -89,25 +92,45 @@ void Game::showLoseScreen(Terminal &terminal) {
 	terminal.read();
 }
 
-void Game::movePlayerIfPossible(const Position &newPosition, const Object &objectAtPosition, Level &level) {
-	if (objectAtPosition.getType() == ObjectType::DOOR) {
+void Game::movePlayerIfPossible(const Position &newPosition, const Object *objectAtPosition, Level &level) {
+	if (!objectAtPosition) {
+		player.setPosition(newPosition);
+		return;
+	}
+
+	if (objectAtPosition->getType() == ObjectType::DOOR) {
 		if (player.hasInInventory(ObjectType::KEY)) {
-			level.deleteObjectAt(objectAtPosition.getPosition());
+			level.deleteObjectAt(objectAtPosition->getPosition());
 		}
-	} else if (objectAtPosition.getType() != ObjectType::WALL) {
+	} else if (objectAtPosition->getType() != ObjectType::WALL) {
 		player.setPosition(newPosition);
 	}
 }
 
-bool Game::processPlayerInteraction(const Object &object, Level &level) {
-	if (object.getType() == ObjectType::GOAL) {
+bool Game::processPlayerInteraction(const Object *object, Level &level) {
+	if (!object) {
+		return true;
+	}
+
+	if (object->getType() == ObjectType::GOAL) {
 		player.setWon(true);
 		return false;
-	} else if (object.getType() == ObjectType::OBSTACLE) {
+	} else if (object->getType() == ObjectType::OBSTACLE) {
 		return false;
-	} else if (object.getType() == ObjectType::KEY) {
-		player.addToInventory(object);
-		level.deleteObjectAt(object.getPosition());
+	} else if (object->getType() == ObjectType::KEY) {
+		auto key = level.deleteObjectAt(object->getPosition());
+		if (key) {
+			player.addToInventory(key);
+		}
+	} else if (object->getType() == ObjectType::COIN) {
+		auto coinObject = level.deleteObjectAt(object->getPosition());
+		if (coinObject) {
+			const Coin *coin = dynamic_cast<Coin *>(coinObject.get());
+			if (coin) {
+				player.addToCoins(coin->getAmount());
+
+			}
+		}
 	}
 
 	return true;

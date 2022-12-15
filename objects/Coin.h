@@ -1,0 +1,21 @@
+//
+// Created by Sam Evans-Golden on 12/13/22.
+//
+
+#ifndef CHACK_COIN_H
+#define CHACK_COIN_H
+
+
+#include "Object.h"
+
+class Coin : public Object {
+	int amount;
+public:
+	Coin(const Position &position, int amount);
+	~Coin() override = default;
+
+	int getAmount() const;
+};
+
+
+#endif //CHACK_COIN_H

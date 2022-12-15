@@ -17,6 +17,7 @@ class Object {
 
 public:
 	Object(char displayCharacter, const Position &position, ObjectType type);
+	virtual ~Object() = default;
 
 	void display(Terminal &terminal) const;
 

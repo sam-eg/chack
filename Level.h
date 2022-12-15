@@ -8,24 +8,25 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 #include "Terminal.h"
 #include "Position.h"
 #include "objects/Object.h"
 
 class Level {
 	std::string name;
-	std::vector<Object> objects;
+	std::vector<std::unique_ptr<Object>> objects;
 
 public:
 	explicit Level(const std::string &name);
 
 	void display(Terminal &terminal);
 
-	Object getObjectAt(const Position &position) const;
+	const Object *getObjectAt(const Position &position) const;
 
-	void putObject(const Object &object);
+	void putObject(Object *object);
 
-	void deleteObjectAt(const Position &position);
+	std::unique_ptr<Object> deleteObjectAt(const Position &position);
 
 	void addRoom(int horizontalSize, int verticalSize, const Position &position);
 
