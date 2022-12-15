@@ -32,6 +32,8 @@ public:
 	bool hasInInventory(ObjectType type);
 
 	void addToCoins(int value);
+
+	int getCoins() const;
 };
 
 

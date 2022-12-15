@@ -22,8 +22,8 @@ class Game {
 	bool processPlayerInteraction(const Object *object, Level &level);
 	static void showTitle(Terminal &terminal);
 	void mainLoop(Terminal &terminal);
-	static void showWinScreen(Terminal &terminal);
-	static void showLoseScreen(Terminal &terminal);
+	void showWinScreen(Terminal &terminal);
+	void showLoseScreen(Terminal &terminal);
 public:
 
 	Game();

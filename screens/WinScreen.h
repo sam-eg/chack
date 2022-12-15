@@ -11,7 +11,7 @@
 
 class WinScreen {
 public:
-	static void display(Terminal &terminal);
+	void display(const Player &player, Terminal &terminal);
 };
 
 

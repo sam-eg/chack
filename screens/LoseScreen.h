@@ -7,10 +7,11 @@
 
 
 #include "../Terminal.h"
+#include "../objects/Player.h"
 
 class LoseScreen {
 public:
-	static void display(Terminal &terminal);
+	void display(const Player &player, Terminal &terminal);
 };
 
 

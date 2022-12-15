@@ -57,6 +57,16 @@ void Game::mainLoop(Terminal &terminal) {
 	do {
 		terminal.clearScreen();
 
+		terminal.setOffset({0, 0});
+		char buffer[128];
+		snprintf(buffer, 128, "Coins: %d", player.getCoins());
+		terminal.display(buffer, Position {1, 0});
+
+		if (player.hasInInventory(ObjectType::KEY)) {
+			terminal.display("Key", Position {2, 0});
+		}
+
+		terminal.setOffset({4, 0});
 		Level &level = levels.at(player.getLevelIndex());
 
 		level.display(terminal);
@@ -82,13 +92,15 @@ void Game::mainLoop(Terminal &terminal) {
 
 void Game::showWinScreen(Terminal &terminal) {
 	terminal.clearScreen();
-	WinScreen::display(terminal);
+	WinScreen winScreen;
+	winScreen.display(player, terminal);
 	terminal.read();
 }
 
 void Game::showLoseScreen(Terminal &terminal) {
 	terminal.clearScreen();
-	LoseScreen::display(terminal);
+	LoseScreen loseScreen;
+	loseScreen.display(player, terminal);
 	terminal.read();
 }
 

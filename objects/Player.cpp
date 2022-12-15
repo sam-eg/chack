@@ -32,6 +32,10 @@ void Player::addToCoins(int value) {
 	coins += value;
 }
 
+int Player::getCoins() const {
+	return coins;
+}
+
 bool Player::hasInInventory(ObjectType objectType) {
 	for (auto &item : inventory) {
 		if (item->getType() == objectType) {
