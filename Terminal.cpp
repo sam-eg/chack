@@ -1,7 +1,3 @@
-//
-// Created by Sam Evans-Golden on 11/21/22.
-//
-
 #include <curses.h>
 #include "Terminal.h"
 

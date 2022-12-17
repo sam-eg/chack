@@ -1,7 +1,3 @@
-//
-// Created by Sam Evans-Golden on 11/25/22.
-//
-
 #ifndef CHACK_COMMAND_H
 #define CHACK_COMMAND_H
 

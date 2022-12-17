@@ -1,7 +1,3 @@
-//
-// Created by Sam Evans-Golden on 12/13/22.
-//
-
 #ifndef CHACK_COIN_H
 #define CHACK_COIN_H
 

@@ -1,7 +1,3 @@
-//
-// Created by Sam Evans-Golden on 12/8/22.
-//
-
 #ifndef CHACK_TITLE_H
 #define CHACK_TITLE_H
 

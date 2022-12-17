@@ -1,9 +1,4 @@
-//
-// Created by Sam Evans-Golden on 12/8/22.
-//
-
 #include "Title.h"
-#include "../Terminal.h"
 
 void Title::display(Terminal &terminal) {
 	terminal.display("CHack", Position {5, terminal.cols() / 2 - 2});

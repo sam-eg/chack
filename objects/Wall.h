@@ -1,7 +1,3 @@
-//
-// Created by Sam Evans-Golden on 12/2/22.
-//
-
 #ifndef CHACK_WALL_H
 #define CHACK_WALL_H
 

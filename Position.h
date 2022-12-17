@@ -1,7 +1,3 @@
-//
-// Created by Sam Evans-Golden on 11/25/22.
-//
-
 #ifndef CHACK_POSITION_H
 #define CHACK_POSITION_H
 

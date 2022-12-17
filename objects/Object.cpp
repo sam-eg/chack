@@ -1,9 +1,4 @@
-//
-// Created by Sam Evans-Golden on 11/26/22.
-//
-
 #include "Object.h"
-#include "../Terminal.h"
 
 Object::Object(char displayCharacter, const Position &position, ObjectType type) :
 	displayCharacter(displayCharacter), position(position), type(type) {}

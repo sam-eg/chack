@@ -1,7 +1,3 @@
-//
-// Created by Sam Evans-Golden on 11/25/22.
-//
-
 #include "Position.h"
 
 Position::Position(int row, int col) : row(row), col(col) {}

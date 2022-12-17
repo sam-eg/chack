@@ -1,7 +1,3 @@
-//
-// Created by Sam Evans-Golden on 11/21/22.
-//
-
 #ifndef CHACK_LEVEL_H
 #define CHACK_LEVEL_H
 
