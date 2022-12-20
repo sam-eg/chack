@@ -17,7 +17,7 @@ Game::Game() {
 }
 
 void Game::init() {
-	Level levelOne {"one"};
+	Level levelOne {"one", 7};
 	levelOne.addRoom(10, 7, Position(0, 0));
 	levelOne.addRoom(7, 10, Position(2, 10));
 	levelOne.addHorizontalHall(5, Position(5, 6));
@@ -31,7 +31,7 @@ void Game::init() {
 
 	levels.push_back(std::move(levelOne));
 
-	Level levelTwo {"two"};
+	Level levelTwo {"two", 5};
 	levelTwo.addRoom(20, 20, Position(0, 0));
 
 	levelTwo.putObject(new UpStairs(Position(6, 17)));
@@ -75,7 +75,7 @@ void Game::mainLoop(Terminal &terminal) {
 		terminal.setOffset({4, 0});
 		Level &level = levels.at(player.getLevelIndex());
 
-		level.display(terminal);
+		level.display(terminal, player.getPosition());
 
 		player.display(terminal);
 

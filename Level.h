@@ -12,11 +12,14 @@
 class Level {
 	std::string name;
 	std::vector<std::unique_ptr<Object>> objects;
+	int visibleRange;
+
+	bool shouldObjectDisplay(const Position &playerPosition, const Position &objectPosition) const;
 
 public:
-	explicit Level(const std::string &name);
+	Level(const std::string &name, int visibleRange);
 
-	void display(Terminal &terminal);
+	void display(Terminal &terminal, const Position &playerPosition);
 
 	const Object *getObjectAt(const Position &position) const;
 

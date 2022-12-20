@@ -2,12 +2,21 @@
 #include "Terminal.h"
 #include "objects/Wall.h"
 
-Level::Level(const std::string &name) : name(name) {}
+Level::Level(const std::string &name, int visibleRange) : name(name), visibleRange(visibleRange) {}
 
-void Level::display(Terminal &terminal) {
+void Level::display(Terminal &terminal, const Position &playerPosition) {
 	for (auto &object : objects) {
-		object->display(terminal);
+		if (shouldObjectDisplay(playerPosition, object->getPosition())) {
+			object->display(terminal);
+		}
 	}
+}
+
+bool Level::shouldObjectDisplay(const Position &playerPosition, const Position &objectPosition) const {
+	if (playerPosition.distance(objectPosition) <= visibleRange) {
+		return true;
+	}
+	return false;
 }
 
 const Object *Level::getObjectAt(const Position &position) const {
