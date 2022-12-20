@@ -9,6 +9,8 @@
 #include "objects/Door.h"
 #include "objects/Key.h"
 #include "objects/Coin.h"
+#include "objects/UpStairs.h"
+#include "objects/DownStairs.h"
 
 Game::Game() {
 	init();
@@ -25,9 +27,17 @@ void Game::init() {
 	levelOne.putObject(new Key(Position(8, 4)));
 	levelOne.putObject(new Coin(Position(3, 13), 3));
 	levelOne.putObject(new Coin(Position(7, 2), 5));
-	levelOne.putObject(new Goal(Position(7, 18)));
+	levelOne.putObject(new DownStairs(Position(6, 17)));
 
 	levels.push_back(std::move(levelOne));
+
+	Level levelTwo {"two"};
+	levelTwo.addRoom(20, 20, Position(0, 0));
+
+	levelTwo.putObject(new UpStairs(Position(6, 17)));
+	levelTwo.putObject(new Goal(Position(18, 18)));
+
+	levels.push_back(std::move(levelTwo));
 
 	player.setPosition(Position(1, 1));
 }
@@ -110,6 +120,10 @@ void Game::movePlayerIfPossible(const Position &newPosition, const Object *objec
 		if (player.hasInInventory(ObjectType::KEY)) {
 			level.deleteObjectAt(objectAtPosition->getPosition());
 		}
+	} else if (objectAtPosition->getType() == ObjectType::DOWNSTAIRS) {
+		player.setLevelIndex(player.getLevelIndex() + 1);
+	} else if (objectAtPosition->getType() == ObjectType::UPSTAIRS) {
+		player.setLevelIndex(player.getLevelIndex() - 1);
 	} else if (objectAtPosition->getType() != ObjectType::WALL) {
 		player.setPosition(newPosition);
 	}
