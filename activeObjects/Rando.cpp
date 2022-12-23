@@ -8,7 +8,7 @@ void Rando::act(Player &player, const Level &level) {
 	if (player.getPosition() == newPosition) {
 		player.kill();
 	}
-	if (!objectAtPosition || objectAtPosition->getType() != ObjectType::WALL) {
+	if (!objectAtPosition || (objectAtPosition->getType() != ObjectType::WALL && objectAtPosition->getType() != ObjectType::DOOR)) {
 		setPosition(newPosition);
 	}
 }

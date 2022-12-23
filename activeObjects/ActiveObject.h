@@ -2,8 +2,8 @@
 #define CHACK_ACTIVEOBJECT_H
 
 
-#include "Object.h"
-#include "Player.h"
+#include "../objects/Object.h"
+#include "../objects/Player.h"
 
 class Level;
 

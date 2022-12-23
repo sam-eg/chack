@@ -11,7 +11,8 @@
 #include "objects/Coin.h"
 #include "objects/UpStairs.h"
 #include "objects/DownStairs.h"
-#include "objects/Rando.h"
+#include "activeObjects/Rando.h"
+#include "activeObjects/Bouncer.h"
 
 Game::Game() {
 	init();
@@ -35,10 +36,13 @@ void Game::init() {
 	levels.push_back(std::move(levelOne));
 
 	Level levelTwo {"two", 5};
-	levelTwo.addRoom(20, 20, Position(0, 0));
+	levelTwo.addRoom(10, 15, Position(5, 5));
 
 	levelTwo.putObject(new UpStairs(Position(6, 17)));
-	levelTwo.putObject(new Goal(Position(18, 18)));
+	levelTwo.putActiveObject(new Bouncer(Position(8, 18), Bouncer::Direction::HORIZONTAL));
+	levelTwo.putActiveObject(new Bouncer(Position(10, 7), Bouncer::Direction::HORIZONTAL));
+	levelTwo.putActiveObject(new Bouncer(Position(13, 11), Bouncer::Direction::VERTICAL));
+	levelTwo.putObject(new Goal(Position(13, 18)));
 
 	levels.push_back(std::move(levelTwo));
 

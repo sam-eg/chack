@@ -8,7 +8,7 @@
 #include "Terminal.h"
 #include "Position.h"
 #include "objects/Object.h"
-#include "objects/ActiveObject.h"
+#include "activeObjects/ActiveObject.h"
 
 class Level {
 	std::string name;
