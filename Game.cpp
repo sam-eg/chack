@@ -11,6 +11,7 @@
 #include "objects/Coin.h"
 #include "objects/UpStairs.h"
 #include "objects/DownStairs.h"
+#include "objects/Rando.h"
 
 Game::Game() {
 	init();
@@ -28,6 +29,8 @@ void Game::init() {
 	levelOne.putObject(new Coin(Position(3, 13), 3));
 	levelOne.putObject(new Coin(Position(7, 2), 5));
 	levelOne.putObject(new DownStairs(Position(6, 17)));
+
+	levelOne.putActiveObject(new Rando(Position(4, 4)));
 
 	levels.push_back(std::move(levelOne));
 
@@ -88,12 +91,16 @@ void Game::mainLoop(Terminal &terminal) {
 		auto objectAtPosition = level.getObjectAt(newPlayerPosition);
 
 		movePlayerIfPossible(newPlayerPosition, objectAtPosition, level);
-		bool gameRunning = processPlayerInteraction(objectAtPosition, level);
+		processPlayerInteraction(objectAtPosition, level);
 
-		if (command == Command::QUIT || !gameRunning) {
+		if (command == Command::QUIT) {
 			break;
 		}
-	} while (true);
+
+		Level &currentLevel = levels.at(player.getLevelIndex());
+		currentLevel.tick(player);
+
+	} while (!player.didWin() && player.isAlive());
 }
 
 void Game::showWinScreen(Terminal &terminal) {
@@ -129,33 +136,46 @@ void Game::movePlayerIfPossible(const Position &newPosition, const Object *objec
 	}
 }
 
-bool Game::processPlayerInteraction(const Object *object, Level &level) {
+void Game::processPlayerInteraction(const Object *object, Level &level) {
 	if (!object) {
-		return true;
+		return;
 	}
 
-	if (object->getType() == ObjectType::GOAL) {
-		player.setWon(true);
-		return false;
-	} else if (object->getType() == ObjectType::OBSTACLE) {
-		return false;
-	} else if (object->getType() == ObjectType::KEY) {
-		auto key = level.deleteObjectAt(object->getPosition());
-		if (key) {
-			player.addToInventory(key);
+	switch (object->getType()) {
+		case ObjectType::GOAL: {
+			player.setWon(true);
+			break;
 		}
-	} else if (object->getType() == ObjectType::COIN) {
-		auto coinObject = level.deleteObjectAt(object->getPosition());
-		if (coinObject) {
-			const Coin *coin = dynamic_cast<Coin *>(coinObject.get());
-			if (coin) {
-				player.addToCoins(coin->getAmount());
-
+		case ObjectType::OBSTACLE: {
+			player.kill();
+			break;
+		}
+		case ObjectType::KEY: {
+			auto key = level.deleteObjectAt(object->getPosition());
+			if (key) {
+				player.addToInventory(key);
 			}
+			break;
 		}
-	}
+		case ObjectType::COIN: {
+			auto coinObject = level.deleteObjectAt(object->getPosition());
+			if (coinObject) {
+				const Coin *coin = dynamic_cast<Coin *>(coinObject.get());
+				if (coin) {
+					player.addToCoins(coin->getAmount());
 
-	return true;
+				}
+			}
+			break;
+		}
+		case ObjectType::RANDO:
+		case ObjectType::BOUNCER: {
+			player.kill();
+			break;
+		}
+		default:
+			break;
+	}
 }
 
 Position Game::computeNewPlayerPosition(Command command) {

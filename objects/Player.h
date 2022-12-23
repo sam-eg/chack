@@ -11,6 +11,7 @@ class Player : public Object {
 	bool won = false;
 	std::vector<std::unique_ptr<Object>> inventory;
 	int coins = 0;
+	bool alive = true;
 
 public:
 	Player(const Position &position, int levelIndex);
@@ -30,6 +31,10 @@ public:
 	void addToCoins(int value);
 
 	int getCoins() const;
+
+	void kill();
+
+	bool isAlive() const;
 };
 
 

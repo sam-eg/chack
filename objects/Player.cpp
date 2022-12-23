@@ -40,3 +40,11 @@ bool Player::hasInInventory(ObjectType objectType) {
 	}
 	return false;
 }
+
+void Player::kill() {
+	alive = false;
+}
+
+bool Player::isAlive() const {
+	return alive;
+}

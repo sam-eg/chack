@@ -10,6 +10,8 @@ enum class ObjectType {
 	DOOR,
 	COIN,
 	UPSTAIRS,
-	DOWNSTAIRS
+	DOWNSTAIRS,
+	BOUNCER,
+	RANDO
 };
 #endif //CHACK_OBJECTTYPE_H

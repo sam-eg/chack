@@ -8,10 +8,12 @@
 #include "Terminal.h"
 #include "Position.h"
 #include "objects/Object.h"
+#include "objects/ActiveObject.h"
 
 class Level {
 	std::string name;
 	std::vector<std::unique_ptr<Object>> objects;
+	std::vector<std::unique_ptr<ActiveObject>> activeObjects;
 	int visibleRange;
 
 	bool shouldObjectDisplay(const Position &playerPosition, const Position &objectPosition) const;
@@ -21,9 +23,13 @@ public:
 
 	void display(Terminal &terminal, const Position &playerPosition);
 
+	void tick(Player &player);
+
 	const Object *getObjectAt(const Position &position) const;
 
 	void putObject(Object *object);
+
+	void putActiveObject(ActiveObject *object);
 
 	std::unique_ptr<Object> deleteObjectAt(const Position &position);
 

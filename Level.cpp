@@ -10,6 +10,17 @@ void Level::display(Terminal &terminal, const Position &playerPosition) {
 			object->display(terminal);
 		}
 	}
+	for (auto &activeObject : activeObjects) {
+		if (shouldObjectDisplay(playerPosition, activeObject->getPosition())) {
+			activeObject->display(terminal);
+		}
+	}
+}
+
+void Level::tick(Player &player) {
+	for (auto &object : activeObjects) {
+		object->act(player, *this);
+	}
 }
 
 bool Level::shouldObjectDisplay(const Position &playerPosition, const Position &objectPosition) const {
@@ -20,6 +31,9 @@ bool Level::shouldObjectDisplay(const Position &playerPosition, const Position &
 }
 
 const Object *Level::getObjectAt(const Position &position) const {
+	for (auto &activeObject : activeObjects) {
+		if (position == activeObject->getPosition()) return activeObject.get();
+	}
 	for (auto &object : objects) {
 		if (position == object->getPosition()) return object.get();
 	}
@@ -28,6 +42,10 @@ const Object *Level::getObjectAt(const Position &position) const {
 
 void Level::putObject(Object *object) {
 	objects.push_back(std::unique_ptr<Object>(object));
+}
+
+void Level::putActiveObject(ActiveObject *object) {
+	activeObjects.push_back(std::unique_ptr<ActiveObject>(object));
 }
 
 std::unique_ptr<Object> Level::deleteObjectAt(const Position &position) {
