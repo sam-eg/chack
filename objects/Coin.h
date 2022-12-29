@@ -8,7 +8,6 @@ class Coin : public Object {
 	int amount;
 public:
 	Coin(const Position &position, int amount);
-	~Coin() override = default;
 
 	int getAmount() const;
 };

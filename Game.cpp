@@ -165,10 +165,6 @@ void Game::processPlayerInteraction(const Object *object, Level &level) {
 			player.setWon(true);
 			break;
 		}
-		case ObjectType::OBSTACLE: {
-			player.kill();
-			break;
-		}
 		case ObjectType::KEY: {
 			auto key = level.deleteObjectAt(object->getPosition());
 			if (key) {
@@ -187,6 +183,7 @@ void Game::processPlayerInteraction(const Object *object, Level &level) {
 			}
 			break;
 		}
+		case ObjectType::OBSTACLE:
 		case ObjectType::RANDO:
 		case ObjectType::BOUNCER: {
 			player.kill();

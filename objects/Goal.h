@@ -6,7 +6,7 @@
 
 class Goal : public Object {
 public:
-	Goal(const Position &position);
+	explicit Goal(const Position &position);
 };
 
 

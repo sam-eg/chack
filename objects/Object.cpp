@@ -15,8 +15,8 @@ const Position &Object::getPosition() const {
 	return position;
 }
 
-void Object::setPosition(const Position &position) {
-	Object::position = position;
+void Object::setPosition(const Position &newPosition) {
+	Object::position = newPosition;
 }
 
 ObjectType Object::getType() const {
