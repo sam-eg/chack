@@ -21,17 +21,22 @@ Game::Game() {
 void Game::init() {
 	Level levelOne {"one", 7};
 	levelOne.addRoom(10, 7, Position(0, 0));
-	levelOne.addRoom(7, 10, Position(2, 10));
+	levelOne.addRoom(7, 11, Position(2, 10));
 	levelOne.addHorizontalHall(5, Position(5, 6));
 
 	levelOne.putObject(new Obstacle(Position(2, 2)));
+	levelOne.putObject(new Obstacle(Position(6, 4)));
+	levelOne.putObject(new Obstacle(Position(6, 13)));
+
 	levelOne.putObject(new Door(Position(6, 6)));
 	levelOne.putObject(new Key(Position(8, 4)));
 	levelOne.putObject(new Coin(Position(3, 13), 3));
 	levelOne.putObject(new Coin(Position(7, 2), 5));
+	levelOne.putObject(new Coin(Position(7, 15), 2));
 	levelOne.putObject(new DownStairs(Position(6, 17)));
 
 	levelOne.putActiveObject(new Rando(Position(4, 4)));
+	levelOne.putActiveObject(new Bouncer(Position(4, 11), Bouncer::HORIZONTAL));
 
 	levels.push_back(std::move(levelOne));
 
@@ -39,9 +44,19 @@ void Game::init() {
 	levelTwo.addRoom(10, 15, Position(5, 5));
 
 	levelTwo.putObject(new UpStairs(Position(6, 17)));
+
+	levelTwo.putObject(new Coin(Position(6, 11), 1));
+	levelTwo.putObject(new Coin(Position(8, 8), 5));
+	levelTwo.putObject(new Coin(Position(12, 8), 3));
+
+	levelTwo.putObject(new Obstacle(Position(12, 12)));
+	levelTwo.putObject(new Obstacle(Position(10, 17)));
+	levelTwo.putObject(new Obstacle(Position(9, 8)));
+
 	levelTwo.putActiveObject(new Bouncer(Position(8, 18), Bouncer::Direction::HORIZONTAL));
 	levelTwo.putActiveObject(new Bouncer(Position(10, 7), Bouncer::Direction::HORIZONTAL));
 	levelTwo.putActiveObject(new Bouncer(Position(13, 11), Bouncer::Direction::VERTICAL));
+
 	levelTwo.putObject(new Goal(Position(13, 18)));
 
 	levels.push_back(std::move(levelTwo));
